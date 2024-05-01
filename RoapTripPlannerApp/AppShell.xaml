@@ -3,48 +3,13 @@
     x:Class="RoapTripPlannerApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:RoapTripPlannerApp.View"
-    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-    Shell.TabBarForegroundColor="DeepSkyBlue"
-    Shell.FlyoutBehavior="Flyout">
+    xmlns:local="clr-namespace:RoapTripPlannerApp"
+    Shell.FlyoutBehavior="Disabled"
+    Title="RoapTripPlannerApp">
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LogingPage" 
-        FlyoutItemIsVisible="False"/>
-    <TabBar FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent 
-            Icon="trips.jpg"
-            Title="My Trips"
-            ContentTemplate="{DataTemplate local:MyTripsPage}"
-            Route="MyTripsPage"/>
-        <ShellContent
-            Icon="home.jpg"
-            Title="Home"
-            ContentTemplate="{DataTemplate local:HomePage}"
-            Route="HomePage"/>
-        <ShellContent 
-            Icon="user.jpg"
-            Title="Profile"
-            ContentTemplate="{DataTemplate local:ProfilePage}"
-            Route="ProfilePage"/>
-    </TabBar>
-
-    <!--<Shell.FlyoutHeader>
-        <Image Source="dotnet_bot"/>
-    </Shell.FlyoutHeader>
-
-    <FlyoutItem Title="Flyout" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Icon="home.png"
-            Title="Home"
-            ContentTemplate="{DataTemplate local:HomePage}"
-            Route="HomePage"/>
-        <ShellContent
-            Title="Login"
-            ContentTemplate="{DataTemplate local:LoginPage}"
-            Route="LogingPage"/>
-    </FlyoutItem>-->
-    
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>
