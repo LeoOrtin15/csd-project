@@ -43,7 +43,10 @@ public partial class LoginViewModel : ObservableObject
             if(user.Password == Password)
             {
                 user.IsUserLoggedIn = true;
-                _authenticationService.Login();   
+                await App.Database.UpdateUser(user);
+                _authenticationService.Login();
+                Username = "";
+                Password = "";
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
             else

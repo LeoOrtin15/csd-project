@@ -37,7 +37,8 @@
                                Margin="5"/>
                     </Frame>
                     <Entry Text="{Binding Password}"  
-                           Placeholder="Password" />
+                           Placeholder="Password"
+                           IsPassword="True"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

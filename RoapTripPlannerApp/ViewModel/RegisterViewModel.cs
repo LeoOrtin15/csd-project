@@ -38,12 +38,16 @@ public partial class RegisterViewModel : ObservableObject
                     Username = Username,
                     Password = Password
                 });
+                Email = "";
+                Username = "";
+                Password = "";
                 // Redirect to LoginPage
                 await Shell.Current.GoToAsync($"/{nameof(LoginPage)}");
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine(ex);
             await App.Current.MainPage.DisplayAlert("Invalid Data Entered", "'Email' and 'Username' must be unique", "OK");
         }
     }

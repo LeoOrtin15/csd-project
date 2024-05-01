@@ -6,7 +6,8 @@
              x:Name="Page"
              xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
              Title="LoginPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
     <!--<ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
             EventName="Appearing" 
@@ -34,7 +35,8 @@
                                Margin="5"/>
                     </Frame>
                     <Entry Text="{Binding Password}"  
-                           Placeholder="Password" />
+                           Placeholder="Password"
+                           IsPassword="True"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

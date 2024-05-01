@@ -7,7 +7,7 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              Title="Road Trip Planner">
     <Grid RowDefinitions="500, *">
-        <maps:Map IsShowingUser="True" IsTrafficEnabled="True" MapType="Street"></maps:Map>
+        <!--<maps:Map IsShowingUser="True" IsTrafficEnabled="True" MapType="Street"></maps:Map>-->
         <Button Grid.Row="1"
                 Text="Create New Trip"
                 FontSize="20"

@@ -27,17 +27,20 @@ namespace RoapTripPlannerApp
 
             builder.Services.AddSingleton<AuthenticationService>();
 
-            builder.Services.AddSingleton<RegisterPage>();
-            builder.Services.AddSingleton<RegisterViewModel>();
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<RegisterViewModel>();
 
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<LoginViewModel>();
 
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<HomeViewModel>();
 
             builder.Services.AddSingleton<NewTripPage>();
             builder.Services.AddSingleton<NewTripViewModel>();
+
+            builder.Services.AddTransient<ProfilePage>();
+            builder.Services.AddTransient<ProfileViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

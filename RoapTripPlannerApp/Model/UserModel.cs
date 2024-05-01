@@ -15,7 +15,7 @@ namespace RoapTripPlannerApp.Model
         [Required]
         public string? Password { get; set; }
         [Required]
-        public bool? IsUserLoggedIn { get; set; } = false;
+        public bool IsUserLoggedIn { get; set; } = false;
         //public List<TripModel>? Trips { get; set; }
     }
 }

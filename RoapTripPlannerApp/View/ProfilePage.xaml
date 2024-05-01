@@ -38,7 +38,8 @@
                     </Frame>
                     <Entry 
                         Text="{Binding Password}"
-                        Placeholder="{Binding Password}"/>
+                        Placeholder="{Binding Password}"
+                        IsPassword="True"/>
                 </StackLayout>
             </Frame>
             <Button Text="Save"
