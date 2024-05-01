@@ -8,6 +8,37 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary>
+                    <Style TargetType="Frame" x:Key="entryFrameStyle">
+                        <Setter Property="BackgroundColor" Value="Transparent" />
+                        <Setter Property="BorderColor" Value="PeachPuff" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0,15,0,0" />
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                        <Setter Property="CornerRadius" Value="15" />
+                    </Style>
+                    <Style TargetType="Frame" x:Key="iconFrameStyle">
+                        <Setter Property="BackgroundColor" Value="LightGreen" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="CornerRadius" Value="30" />
+                        <Setter Property="HeightRequest" Value="40" />
+                        <Setter Property="WidthRequest" Value="40" />
+                        <Setter Property="Margin" Value="5" />
+                    </Style>
+                    <Style TargetType="Entry">
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="VerticalOptions" Value="Center" />
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                        <Setter Property="Margin" Value="20,0,20,0" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="DeepSkyBlue" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="CornerRadius" Value="30" />
+                        <Setter Property="WidthRequest" Value="200" />
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
