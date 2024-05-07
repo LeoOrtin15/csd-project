@@ -20,9 +20,11 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: Install .NET MAUI
+      run: dotnet workload unstall maui
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build RoapTripPlannerApp/RoapTripPlannerApp.csproj -c Realease -t net8.0-android--no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
