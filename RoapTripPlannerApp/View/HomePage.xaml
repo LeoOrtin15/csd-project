@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RoapTripPlannerApp.View.HomePage"
+             xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             Title="Road Trip Planner">
+    <Grid RowDefinitions="500, *">
+        <!--<maps:Map IsShowingUser="True" IsTrafficEnabled="True" MapType="Street"></maps:Map>-->
+        <Button Grid.Row="1"
+                Text="Create New Trip"
+                FontSize="20"
+                HeightRequest="75"
+                Command="{Binding NewTripCommand}"/>
+    </Grid>
+
+</ContentPage>
