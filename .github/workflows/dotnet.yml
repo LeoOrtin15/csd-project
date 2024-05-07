@@ -23,7 +23,7 @@ jobs:
     - name: Install .NET MAUI
       run: dotnet workload install maui
     - name: Restore dependencies
-      run: dotnet restore RoapTripPlannerApp/RoapTripPlannerApp.csproj -t net8.0-android
+      run: dotnet restore RoapTripPlannerApp/RoapTripPlannerApp.csproj
     - name: Build
       run: dotnet build RoapTripPlannerApp/RoapTripPlannerApp.csproj -c Realease -t net8.0-android --no-restore
     - name: Test
