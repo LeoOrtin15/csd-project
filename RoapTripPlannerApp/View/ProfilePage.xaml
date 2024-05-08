@@ -4,8 +4,9 @@
              x:Class="RoapTripPlannerApp.View.ProfilePage"
              xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
              Title="Profile">
-    <Grid ColumnDefinitions="20, *, 20"
-          RowDefinitions="*, 200">
+    <Grid RowDefinitions="*, 200"
+          Padding="5"
+          Margin="20,0,20,0">
         <StackLayout Orientation="Vertical"
                      Grid.Column="1">
             <Frame Style="{StaticResource entryFrameStyle}" >
@@ -22,7 +23,7 @@
             <Frame Style="{StaticResource entryFrameStyle}" >
                 <StackLayout Orientation="Horizontal">
                     <Frame Style="{StaticResource iconFrameStyle}">
-                        <Image Source="user.png"
+                        <Image Source="user.jpg"
                                Margin="5"/>
                     </Frame>
                     <Entry 
@@ -33,7 +34,7 @@
             <Frame Style="{StaticResource entryFrameStyle}" >
                 <StackLayout Orientation="Horizontal">
                     <Frame Style="{StaticResource iconFrameStyle}">
-                        <Image Source="lock.png"
+                        <Image Source="lock.jpg"
                                Margin="5" />
                     </Frame>
                     <Entry 

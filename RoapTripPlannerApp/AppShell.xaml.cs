@@ -19,6 +19,8 @@ namespace RoapTripPlannerApp
             Routing.RegisterRoute(nameof(MyTripsPage), typeof(MyTripsPage));
 
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+
+            Routing.RegisterRoute(nameof(EditTripPage), typeof(EditTripPage));
         }
     }
 }

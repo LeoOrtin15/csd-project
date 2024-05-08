@@ -11,9 +11,10 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="Login" 
+        Route="LogingPage" 
         FlyoutItemIsVisible="False"/>
-    <TabBar FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem
+        FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent 
             Icon="trips.jpg"
             Title="My Trips"
@@ -29,5 +30,5 @@
             Title="Profile"
             ContentTemplate="{DataTemplate local:ProfilePage}"
             Route="ProfilePage"/>
-    </TabBar>
+    </FlyoutItem>
 </Shell>

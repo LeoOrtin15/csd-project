@@ -9,30 +9,30 @@ namespace RoapTripPlannerApp.ViewModel;
 
 public partial class ProfileViewModel : ObservableObject
 {
-    private readonly AuthenticationService _authenticationService;
-    public ProfileViewModel(AuthenticationService authenticationService)
-    {
-        _authenticationService = authenticationService;
-    }
-
     [ObservableProperty]
     public string? username;
     [ObservableProperty]
     public string? password;
     [ObservableProperty]
     public string? email;
+    private readonly DatabaseService database;
+    public ProfileViewModel(DatabaseService database)
+    {
+        this.database = database;
+    }
 
     [RelayCommand]
     async Task LogOut()
     {
-        List<UserModel> users = await App.Database.GetAllUsers();
+        // Search in the database for the user that is logged in
+        List<UserModel> users = await database.GetAllUsers();
         foreach (UserModel user in users)
         {
             if (user.IsUserLoggedIn)
             {
-                _authenticationService.Logout();
+                // Log out the user
                 user.IsUserLoggedIn = false;
-                await App.Database.UpdateUser(user);
+                await database.UpdateUserDetails(user);
                 break;
             }
         }

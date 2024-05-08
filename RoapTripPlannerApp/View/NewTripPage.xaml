@@ -5,10 +5,67 @@
              xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
              Title="Create Trip"
              Shell.TabBarIsVisible="False">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="Auto, Auto, Auto, *"
+          Padding="5"
+          Margin="20,0,20,0"
+          RowSpacing="50">
+        <Frame Style="{StaticResource entryFrameStyle}" >
+            <StackLayout>
+                <Entry Text="{Binding TripName}"  
+                       Placeholder="Trip Name"
+                       FontSize="Medium"/>
+            </StackLayout>
+        </Frame>
+        <Frame Style="{StaticResource entryFrameStyle}" 
+               Grid.Row="1">
+            <StackLayout Orientation="Horizontal">
+                <Entry Text="{Binding FirstStop}"  
+                       Placeholder="First Stop" />
+                <Frame Style="{StaticResource iconFrameStyle}">
+                    <StackLayout>
+                        <ImageButton Source="location.png"
+                                     Margin="5"
+                                     Command="{Binding MapCommand}"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="2"
+                     Spacing="5">
+            <Frame Style="{StaticResource entryFrameStyle}" >
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             Padding="5">
+                    <Label Text="Start Date:"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                    <DatePicker Date="{Binding StartDate}"
+                                MinimumDate="{Binding Today}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="16"/>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{StaticResource entryFrameStyle}" >
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             Padding="5">
+                    <Label Text="End Date:"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                    <DatePicker Date="{Binding EndDate}"
+                                MinimumDate="{Binding Today}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="16"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <Button Text="Create Trip"
+                Grid.Row="3"
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Command="{Binding CreateTripCommand}"/>
+    </Grid>
 </ContentPage>
