@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
              x:Class="RoapTripPlannerApp.View.EditTripPage"
-             Title="EditTripPage">
+             Title="EditTripPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
     <Grid Padding="10"
           Margin="10"
-          RowDefinitions="Auto,Auto,*">
+          RowDefinitions="Auto,Auto,*, *">
         <Frame Style="{StaticResource entryFrameStyle}" >
-            <Label Text="{Binding TripName}"
+            <Label Text="{Binding Trip.Name}"
                    FontSize="Medium"/>
         </Frame>
         <StackLayout Orientation="Horizontal"
@@ -21,7 +23,7 @@
                     <Label Text="Start Date:"
                            VerticalOptions="Center"
                            FontAttributes="Bold"/>
-                    <DatePicker Date="{Binding StartDate}"
+                    <DatePicker Date="{Binding Trip.StartDate}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="FillAndExpand"
                                 FontSize="16"/>
@@ -34,14 +36,14 @@
                     <Label Text="End Date:"
                            VerticalOptions="Center"
                            FontAttributes="Bold"/>
-                    <DatePicker Date="{Binding EndDate}"
+                    <DatePicker Date="{Binding Trip.EndDate}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="FillAndExpand"
                                 FontSize="16"/>
                 </StackLayout>
             </Frame>
         </StackLayout>
-        <CollectionView ItemsSource="{Binding Users}"
+        <CollectionView ItemsSource="{Binding Stops}"
                         SelectionMode="Single"
                         Grid.Row="2">
             <CollectionView.ItemTemplate>
@@ -49,13 +51,14 @@
                     <StackLayout Orientation="Horizontal"
                                  Padding="10"
                                  Margin="10">
-                        <Label Text="{Binding Username}"
-                               FontSize="Medium"/>
-                        <Label Text="{Binding Email}"
+                        <Label Text="{Binding Name}"
                                FontSize="Medium"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Save Trip"
+                Command="{Binding SaveTripCommand}"
+                Grid.Row="3 "/>
     </Grid>
 </ContentPage>
