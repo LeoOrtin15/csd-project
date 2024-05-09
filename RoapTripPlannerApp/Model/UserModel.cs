@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using System.ComponentModel.DataAnnotations;
 
 namespace RoapTripPlannerApp.Model
 {
@@ -8,14 +7,11 @@ namespace RoapTripPlannerApp.Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        [Unique, Required]
+        [Unique]
         public string? Username { get; set; }
-        [Unique, Required, EmailAddress]
+        [Unique]
         public string? Email { get; set; }
-        [Required]
         public string? Password { get; set; }
-        [Required]
         public bool IsUserLoggedIn { get; set; } = false;
-        //public List<TripModel>? Trips { get; set; }
     }
 }

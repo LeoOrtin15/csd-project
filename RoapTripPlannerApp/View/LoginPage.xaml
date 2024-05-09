@@ -9,19 +9,19 @@
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
     <!--<ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior 
-            EventName="Appearing" 
-            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LoginViewModel}}, Path=OnAppearingCommand}"/>
+        <toolkit:EventToCommandBehavior EventName="Appearing" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LoginViewModel}}, Path=OnAppearingCommand}"/>
     </ContentPage.Behaviors>-->
-    <Grid RowDefinitions="20, Auto, Auto, Auto" 
-          RowSpacing="20">
-        <StackLayout Grid.Row="1"
-                     Orientation="Vertical" 
+    <Grid RowDefinitions="Auto, Auto, Auto" 
+          RowSpacing="20"
+          Padding="5"
+          Margin="20,20,20,0">
+        <StackLayout Orientation="Vertical" 
                      VerticalOptions="CenterAndExpand">
             <Frame Style="{StaticResource entryFrameStyle}" >
                 <StackLayout Orientation="Horizontal">
                     <Frame Style="{StaticResource iconFrameStyle}" >
-                        <Image Source="user.png"
+                        <Image Source="user.jpg"
                                Margin="5"/>
                     </Frame>
                     <Entry Text="{Binding Username}"  
@@ -31,7 +31,7 @@
             <Frame Style="{StaticResource entryFrameStyle}" >
                 <StackLayout Orientation="Horizontal">
                     <Frame Style="{StaticResource iconFrameStyle}">
-                        <Image Source="lock.png"
+                        <Image Source="lock.jpg"
                                Margin="5"/>
                     </Frame>
                     <Entry Text="{Binding Password}"  
@@ -41,14 +41,14 @@
             </Frame>
         </StackLayout>
         <Button Text="LOG IN" 
-                Grid.Row="2"
+                Grid.Row="1"
                 Command="{Binding LoginCommand}"/>
         <StackLayout Orientation="Horizontal" 
                      HorizontalOptions="CenterAndExpand" 
                      Margin="0,20,0,0" 
                      Padding="0"
                      Spacing="10"
-                     Grid.Row="3">
+                     Grid.Row="2">
             <Label Text="New User?" 
                    TextColor="DarkGray" 
                    FontSize="Small"/>

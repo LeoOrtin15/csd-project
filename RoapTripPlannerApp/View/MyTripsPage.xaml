@@ -4,10 +4,27 @@
              x:Class="RoapTripPlannerApp.View.MyTripsPage"
              xmlns:viewmodel="clr-namespace:RoapTripPlannerApp.ViewModel"
              Title="MyTripsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid Padding="10"
+          Margin="10"
+          RowDefinitions="Auto,Auto,*">
+        <CollectionView ItemsSource="{Binding Trips}"
+                        Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="10"
+                                     Margin="10">
+                            <Label Text="{Binding Name}"
+                                   FontSize="Medium"/>
+                            <Label Text="{Binding StartDate}"
+                                   FontSize="Small"/>
+                            <Label Text="{Binding EndDate}"
+                                   FontSize="Small"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

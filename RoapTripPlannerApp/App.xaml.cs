@@ -4,14 +4,11 @@ namespace RoapTripPlannerApp
 {
     public partial class App : Application
     {
-        public static DatabaseService? Database { get; set; }
-        public App(DatabaseService db)
+        public App()
         {
             InitializeComponent();
 
             MainPage = new AppShell();
-
-            Database = db;
         }
     }
 }

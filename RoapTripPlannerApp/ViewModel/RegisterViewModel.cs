@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RoapTripPlannerApp.Model;
+using RoapTripPlannerApp.Services;
 using RoapTripPlannerApp.View;
 
 namespace RoapTripPlannerApp.ViewModel;
@@ -14,10 +15,10 @@ public partial class RegisterViewModel : ObservableObject
     public string? password;
     [ObservableProperty]
     public string? email;
-
-    public RegisterViewModel()
+    private readonly DatabaseService database;
+    public RegisterViewModel(DatabaseService database)
     {
-        // Initialize the RegisterViewModel
+        this.database = database;
     }
 
     [RelayCommand]
@@ -32,7 +33,7 @@ public partial class RegisterViewModel : ObservableObject
             else
             {
                 // Add user to de database
-                await App.Database.AddUser(new UserModel
+                await database.AddUser(new UserModel
                 {
                     Email = Email,
                     Username = Username,
@@ -45,9 +46,8 @@ public partial class RegisterViewModel : ObservableObject
                 await Shell.Current.GoToAsync($"/{nameof(LoginPage)}");
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            System.Diagnostics.Debug.WriteLine(ex);
             await App.Current.MainPage.DisplayAlert("Invalid Data Entered", "'Email' and 'Username' must be unique", "OK");
         }
     }

@@ -5,53 +5,71 @@ namespace RoapTripPlannerApp.Services;
 
 public class DatabaseService
 {
-    readonly string _dbPath;
-
-    private SQLiteAsyncConnection conn;
-
-    public DatabaseService(string dbPath)
+    private readonly SQLiteAsyncConnection connection;
+    public  DatabaseService()
     {
-        _dbPath = dbPath;
-    }
-    private async Task Init()
-    {
-        if (conn != null)
+        if (connection != null)
             return;
 
-        conn = new SQLiteAsyncConnection(_dbPath);
-        await conn.CreateTableAsync<UserModel>();
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "database.db3");
+
+        connection = new SQLiteAsyncConnection(dbPath);
+
+        connection.CreateTableAsync<UserModel>();
+        connection.CreateTableAsync<TripModel>();
     }
 
+    // Add new user to the database
     public async Task AddUser(UserModel user)
     {
-        await Init();
-
-        // Add new user to the database
-        await conn.InsertAsync(user);
-        //await conn.InsertAsync(new UserModel
-        //{
-        //    Email = email,
-        //    Username = username,
-        //    Password = password
-        //});
+        await connection.InsertAsync(user);
 
     }
+    // Get all users from the database
     public async Task<List<UserModel>> GetAllUsers()
     {
-        await Init();
-
-        return await conn.Table<UserModel>().ToListAsync();
+        return await connection.Table<UserModel>().ToListAsync();
     }
-    public async Task<UserModel> GetUser(int id)
+    // Get a user from the database by username
+    public async Task<UserModel> GetUser(string username)
     {
-        await Init();
-
-        return await conn.GetAsync<UserModel>(id);
+        return await connection.Table<UserModel>().Where(i => i.Username == username).FirstOrDefaultAsync();
     }
-    public async Task UpdateUser(UserModel user)
+    // Get the user that is logged in
+    public async Task<UserModel> GetLoggedInUser()
+    {
+        return await connection.Table<UserModel>().Where(i => i.IsUserLoggedIn == true).FirstOrDefaultAsync();
+    }
+    // Update the user details
+    public async Task UpdateUserDetails(UserModel user)
     { 
-        await Init();
+        await connection.UpdateAsync(user);
+    }
+    // Add a new trip to the database
+    public async Task AddTrip(TripModel trip)
+    {
+        UserModel user = await GetLoggedInUser();
 
-        await conn.UpdateAsync(user);
+        trip.UserId = user.Id;
+
+        await connection.InsertAsync(trip);
+    }
+    // Get all trips from the logged in user
+    public async Task<List<TripModel>> GetTrips()
+    {
+        UserModel user = await GetLoggedInUser();
+
+        return await connection.Table<TripModel>().Where(i => i.UserId == user.Id).ToListAsync();
+    }
+
+    // Update the trip details
+    public async Task UpdateTrip(TripModel trip)
+    {
+        await connection.UpdateAsync(trip);
+    }
+    // Delete the trip
+    public async Task DeleteTrip(TripModel trip)
+    {
+        await connection.DeleteAsync(trip);
     }
 }

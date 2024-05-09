@@ -9,4 +9,9 @@ public partial class NewTripPage : ContentPage
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+    private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+    {
+
+    }
 }
