@@ -19,15 +19,15 @@
         <Frame Style="{StaticResource entryFrameStyle}" 
                Grid.Row="1">
             <StackLayout Orientation="Horizontal">
-                <Entry Text="{Binding FirstStop}"  
-                       Placeholder="First Stop" />
                 <Frame Style="{StaticResource iconFrameStyle}">
-                    <StackLayout>
+                    <Grid>
                         <ImageButton Source="location.png"
                                      Margin="5"
                                      Command="{Binding MapCommand}"/>
-                    </StackLayout>
+                    </Grid>
                 </Frame>
+                <SearchBar Text="{Binding FirstStop}"
+                           Placeholder="Add First Stop..." />
             </StackLayout>
         </Frame>
         <StackLayout Orientation="Horizontal"
