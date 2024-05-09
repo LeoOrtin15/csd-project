@@ -33,8 +33,7 @@ public partial class LoginViewModel : ObservableObject
             // If the user is found (registered), check if the password is correct
             if (currentUser.Password == Password)
             {
-                currentUser.IsUserLoggedIn = true;
-                await database.UpdateUserDetails(currentUser);
+                await database.LogInUser(currentUser);
                 Username = "";
                 Password = "";
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");

@@ -35,14 +35,33 @@ public class DatabaseService
     {
         return await connection.Table<UserModel>().Where(i => i.Username == username).FirstOrDefaultAsync();
     }
+    // Log in the user
+    public async Task LogInUser(UserModel user)
+    {
+        user.IsUserLoggedIn = true;
+        await connection.UpdateAsync(user);
+    }
+    // Log out the user
+    public async Task LogOutUser()
+    {
+        // Search in the database for the user that is logged in
+        var user = await GetLoggedInUser();
+        // Log out the user
+        user.IsUserLoggedIn = false;
+        await connection.UpdateAsync(user);
+    }
     // Get the user that is logged in
     public async Task<UserModel> GetLoggedInUser()
     {
         return await connection.Table<UserModel>().Where(i => i.IsUserLoggedIn == true).FirstOrDefaultAsync();
     }
     // Update the user details
-    public async Task UpdateUserDetails(UserModel user)
+    public async Task UpdateUserDetails(string email, string username, string password)
     { 
+        var user = await GetLoggedInUser();
+        user.Username = username;
+        user.Email = email;
+        user.Password = password;
         await connection.UpdateAsync(user);
     }
     // Add a new trip to the database

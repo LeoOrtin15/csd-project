@@ -6,9 +6,9 @@
              Title="MyTripsPage">
     <Grid Padding="10"
           Margin="10"
-          RowDefinitions="Auto,Auto,*">
+          RowDefinitions="Auto,*">
         <CollectionView ItemsSource="{Binding Trips}"
-                        Grid.Row="2">
+                        Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame>

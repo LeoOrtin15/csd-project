@@ -35,8 +35,12 @@ public partial class NewTripViewModel : ObservableObject
             StartDate = StartDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
             EndDate = EndDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
         };
-
         await database.AddTrip(trip);
+
+        TripName = "";
+        FirstStop = "";
+        StartDate = DateTime.Today;
+        EndDate = DateTime.Today;
 
         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
     }

@@ -43,8 +43,9 @@
                         IsPassword="True"/>
                 </StackLayout>
             </Frame>
-            <Button Text="Save"
-                    Margin="20"/>
+            <Button Text="Update Details"
+                    Margin="20"
+                    Command="{Binding UpdateDetailsCommand}"/>
         </StackLayout>
         <Button Grid.Row="1"
                 Grid.Column="1"
