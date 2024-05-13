@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RoadTripPlannerApp.View.ProfilePage"
+             xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
+             Title="Profile">
+    <Grid RowDefinitions="*, 200"
+          Padding="5"
+          Margin="20,0,20,0">
+        <StackLayout Orientation="Vertical"
+                     Grid.Column="1">
+            <Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Frame Style="{StaticResource iconFrameStyle}">
+                        <Image Source="email.png"
+                               Margin="5" />
+                    </Frame>
+                    <Entry 
+                        Text="{Binding Email}"
+                        Placeholder="{Binding Email}"/>
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Frame Style="{StaticResource iconFrameStyle}">
+                        <Image Source="user.png"
+                               Margin="5"/>
+                    </Frame>
+                    <Entry 
+                        Text="{Binding Username}"
+                        Placeholder="{Binding Username}"/>
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Frame Style="{StaticResource iconFrameStyle}">
+                        <Image Source="lock.png"
+                               Margin="5" />
+                    </Frame>
+                    <Entry 
+                        Text="{Binding Password}"
+                        Placeholder="{Binding Password}"
+                        IsPassword="True"/>
+                </StackLayout>
+            </Frame>
+            <Button Text="Update Details"
+                    Margin="20"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="15"
+                    Command="{Binding UpdateDetailsCommand}"/>
+        </StackLayout>
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Text="Log Out"
+                BackgroundColor="Coral"
+                TextColor="Black"
+                FontSize="Large"
+                VerticalOptions="Center"
+                WidthRequest="150"
+                Command="{Binding LogOutCommand}"/>
+    </Grid>
+</ContentPage>

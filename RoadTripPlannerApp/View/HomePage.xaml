@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RoadTripPlannerApp.View.HomePage"
+             xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             Title="Road Trip Planner"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="400, *, *">
+        <maps:Map x:Name="map" 
+                  IsShowingUser="True" 
+                  IsTrafficEnabled="True" 
+                  MapType="Street">
+        </maps:Map>
+        <Button Grid.Row="1"
+                Text="Create New Trip"
+                FontSize="20"
+                HeightRequest="50"
+                WidthRequest="200"
+                Command="{Binding NewTripCommand}"/>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="2"
+                     HorizontalOptions="CenterAndExpand"
+                     Spacing="200">
+            <StackLayout Orientation="Vertical">
+                <Frame Style="{StaticResource iconFrameStyle}"
+                       HeightRequest="60"
+                       WidthRequest="60">
+                    <Grid>
+                        <ImageButton Source="trips.png"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 Command="{Binding MyTripsCommand}"/>
+                    </Grid>
+                </Frame>
+                <Label Text="My Trips"
+                       HorizontalOptions="Center"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical">
+                <Frame Style="{StaticResource iconFrameStyle}"
+                       HeightRequest="60"
+                       WidthRequest="60">
+                    <Grid>
+                        <ImageButton Source="user.png"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     Command="{Binding ProfileCommand}"/>
+                    </Grid>
+                </Frame>
+                <Label Text="Profile"
+                       HorizontalOptions="Center"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
