@@ -23,8 +23,8 @@ jobs:
     - name: Install .NET MAUI
       run: dotnet workload install maui
     - name: Restore dependencies
-      run: dotnet restore RoapTripPlannerApp/RoapTripPlannerApp.csproj
+      run: dotnet restore RoadTripPlannerApp/RoadTripPlannerApp.csproj
     - name: Build
-      run: dotnet build RoapTripPlannerApp/RoapTripPlannerApp.csproj --no-restore
+      run: dotnet build RoadTripPlannerApp/RoadTripPlannerApp.csproj --no-restore
     #- name: Test
       #run: dotnet test --no-build --verbosity normal
