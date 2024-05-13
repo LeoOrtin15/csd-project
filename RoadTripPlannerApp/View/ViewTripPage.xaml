@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RoadTripPlannerApp.View.ViewTripPage"
+             Title="ViewTripPage"
+             Shell.NavBarIsVisible="False">
+    <Grid Padding="10"
+          Margin="10"
+          RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="0"
+                     Spacing="20">
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Start">
+                <ImageButton Source="home.png"
+                             HorizontalOptions="Center"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             BackgroundColor="White"
+                             CornerRadius="5"
+                             Command="{Binding HomeCommand}"/>
+                <Label Text="Home"
+                       FontSize="Micro"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Start">
+                <ImageButton Source="trips.png"
+                             HorizontalOptions="Center"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             BackgroundColor="White"
+                             CornerRadius="5"
+                             Command="{Binding MyTripsCommand}"/>
+                <Label Text="My Trips"
+                       FontSize="Micro"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+        <Frame Grid.Row="1"
+               Padding="5"
+               HorizontalOptions="Center"
+               WidthRequest="300">
+            <StackLayout>
+                <Label Text="{Binding Trip.Name}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </Frame>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="2"
+                     HorizontalOptions="Center"
+                     Spacing="10">
+            <Frame>
+                <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                    <Label Text="{Binding Trip.StartDate, StringFormat='Start Date: {0}'}"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                    <Label Text="{Binding Trip.EndDate, StringFormat='End Date: {0}'}"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding Stops}"
+                        SelectionMode="Single"
+                        Grid.Row="3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal"
+                                 Padding="10"
+                                 Margin="10">
+                        <Label Text="{Binding Name}"
+                               FontSize="Medium"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="4"
+                     HorizontalOptions="CenterAndExpand"
+                     Spacing="20">
+            <Button Text="Edit"
+                    Command="{Binding EditCommand}"
+                    WidthRequest="100"/>
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="Coral"
+                    WidthRequest="100"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

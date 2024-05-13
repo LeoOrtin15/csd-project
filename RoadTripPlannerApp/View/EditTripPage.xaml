@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
+             x:Class="RoadTripPlannerApp.View.EditTripPage"
+             Title="EditTripPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid Padding="10"
+          Margin="10"
+          RowDefinitions="Auto,Auto,*, *">
+        <Frame>
+            <Label Text="{Binding Trip.Name}"
+                   FontSize="Medium"/>
+        </Frame>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="1"
+                     Spacing="5">
+            <Frame>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             Padding="5">
+                    <Label Text="Start Date:"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                    <DatePicker Date="{Binding Trip.StartDate}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="16"/>
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             Padding="5">
+                    <Label Text="End Date:"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                    <DatePicker Date="{Binding Trip.EndDate}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="16"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <CollectionView ItemsSource="{Binding Stops}"
+                        SelectionMode="Single"
+                        Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal"
+                                 Padding="10"
+                                 Margin="10">
+                        <Label Text="{Binding Name}"
+                               FontSize="Medium"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Home"
+                Command="{Binding SaveTripCommand}"
+                Grid.Row="3 "/>
+    </Grid>
+</ContentPage>
