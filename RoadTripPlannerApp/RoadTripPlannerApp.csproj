@@ -21,10 +21,10 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>RoapTripPlannerApp</ApplicationTitle>
+		<ApplicationTitle>RoadTripPlannerApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.roaptripplannerapp</ApplicationId>
+		<ApplicationId>com.companyname.roadtripplannerapp</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
