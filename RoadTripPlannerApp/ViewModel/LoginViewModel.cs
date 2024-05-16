@@ -12,10 +12,12 @@ public partial class LoginViewModel : ObservableObject
     public string? username;
     [ObservableProperty]
     public string? password;
-    private readonly DatabaseService database;
-    public LoginViewModel(DatabaseService databaseService)
+    private readonly IDatabaseService database;
+    private readonly IAlertService alertService;
+    public LoginViewModel(IDatabaseService database, IAlertService alertService)
     {
-        database = databaseService;
+        this.database = database;
+        this.alertService = alertService;
     }
 
     [RelayCommand]
@@ -23,7 +25,7 @@ public partial class LoginViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
-            await App.Current.MainPage.DisplayAlert("Mandatory Fields Empty", "'Username' and 'Password' are mandatory fields", "OK");
+            await alertService.ShowAlert("Mandatory Fields Empty", "'Username' and 'Password' are mandatory fields");
             return;
         }
         // Search in the database for the user that is trying to log in
@@ -34,18 +36,18 @@ public partial class LoginViewModel : ObservableObject
             if (currentUser.Password == Password)
             {
                 await database.LogInUser(currentUser);
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                 Username = "";
                 Password = "";
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Incorrect Password", "The password you entered is incorrect", "OK");
+                await alertService.ShowAlert("Incorrect Password", "The password you entered is incorrect");
             }
         }
         else
         {
-            await App.Current.MainPage.DisplayAlert("User Not Registered", $"{String.Format("Username {0} is not registered", Username)}", "OK");
+            await alertService.ShowAlert("User Not Registered", $"{String.Format("Username {0} is not registered", Username)}");
         }
     }
 
@@ -54,14 +56,7 @@ public partial class LoginViewModel : ObservableObject
     {
         // Redirect to RegisterPage
         await Shell.Current.GoToAsync($"/{nameof(RegisterPage)}");
+        Username = "";
+        Password = "";
     }
-
-    //[RelayCommand]
-    //async Task OnAppearing()
-    //{
-    //    if (await _authenticationService.IsAuthenticatedAsync())
-    //    {
-    //        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-    //    }
-    //}
 }

@@ -1,6 +1,4 @@
 using RoadTripPlannerApp.ViewModel;
-using Microsoft.Maui.Maps;
-using Map = Microsoft.Maui.Controls.Maps.Map;
 
 namespace RoadTripPlannerApp.View;
 

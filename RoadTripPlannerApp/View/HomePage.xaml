@@ -3,17 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RoadTripPlannerApp.View.HomePage"
              xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
-             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             x:DataType="viewmodel:HomeViewModel"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              Title="Road Trip Planner"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
     <Grid RowDefinitions="400, *, *">
-        <maps:Map x:Name="map" 
+        <!--<mauimaps:Map x:Name="map" 
                   IsShowingUser="True" 
                   IsTrafficEnabled="True" 
                   MapType="Street">
-        </maps:Map>
+        </mauimaps:Map>-->
+        <!--<maps:Map x:Name="map"
+                        MyLocationEnabled="True"
+                        InitialCameraUpdate="53.33658221363408, -6.3268649340705405"/>-->
         <Button Grid.Row="1"
                 Text="Create New Trip"
                 FontSize="20"

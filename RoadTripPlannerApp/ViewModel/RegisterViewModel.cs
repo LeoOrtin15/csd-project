@@ -15,20 +15,22 @@ public partial class RegisterViewModel : ObservableObject
     public string? password;
     [ObservableProperty]
     public string? email;
-    private readonly DatabaseService database;
-    public RegisterViewModel(DatabaseService database)
+    private readonly IDatabaseService database;
+    private readonly IAlertService alertService;
+    public RegisterViewModel(IDatabaseService database, IAlertService alertService)
     {
         this.database = database;
+        this.alertService = alertService;
     }
 
     [RelayCommand]
-    async Task Register()
+    public async Task Register()
     {
         try
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrWhiteSpace(Password))
             {
-                await App.Current.MainPage.DisplayAlert("Mandatory Fields Empty", "'Email', 'Username' and 'Password' are mandatory fields", "OK");
+                await alertService.ShowAlert("Mandatory Fields Empty", "'Email', 'Username' and 'Password' are mandatory fields");
             }
             else
             {
@@ -49,14 +51,14 @@ public partial class RegisterViewModel : ObservableObject
         catch (Exception ex)
         {
             if (ex.Message.Contains("UNIQUE constraint failed"))
-                await App.Current.MainPage.DisplayAlert("Invalid Data Entered", "'Email' and 'Username' must be unique", "OK");
-            else
-                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                await alertService.ShowAlert("Invalid Data Entered", "'Email' and 'Username' must be unique");
+            //else
+            //    await alertService.ShowAlert("Error", ex.Message);
         }
     }
 
     [RelayCommand]
-    async Task Login()
+    public async Task Login()
     {
         // Redirect to LoginPage
         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");

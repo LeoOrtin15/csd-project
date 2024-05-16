@@ -19,28 +19,43 @@ public partial class NewTripViewModel : ObservableObject
     public DateTime endDate;
     [ObservableProperty]
     public DateTime today = DateTime.Today;
-    private readonly DatabaseService database;
-    public NewTripViewModel(DatabaseService databaseService)
+    private readonly IDatabaseService database;
+    private readonly IAlertService alertService;
+    public NewTripViewModel(IDatabaseService database, IAlertService alertService)
     {
-        database = databaseService;
+        this.database = database;
+        this.alertService = alertService;
     }
-
+    [RelayCommand]
+    async Task Home()
+    {
+        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+    }
     [RelayCommand]
     async Task CreateTrip()
     {
         if (string.IsNullOrWhiteSpace(TripName) || string.IsNullOrWhiteSpace(FirstStop))
         {
-            await App.Current.MainPage.DisplayAlert("Mandatory Fields Empty", "'Trip Name' and 'First Stop' are mandatory fields", "OK");
+            await alertService.ShowAlert("Mandatory Fields Empty", "'Trip TripName' and 'First Stop' are mandatory fields");
             return;
         }
         TripModel trip = new TripModel
         {
-            Name = TripName,
+            TripName = TripName,
             FirstStop = FirstStop,
-            StartDate = StartDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-            EndDate = EndDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
+            StartDate = StartDate,
+            EndDate = EndDate
+        };
+
+        StopModel stop = new StopModel
+        {
+            TripId = trip.Id,
+            StopName = FirstStop,
+            ArrivalDate = StartDate
         };
         await database.AddTrip(trip);
+
+        await database.AddStop(stop, trip);
 
         TripName = "";
         FirstStop = "";

@@ -13,15 +13,21 @@ namespace RoadTripPlannerApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                // Initialize the .NET MAUI Community Toolkit
-                .UseMauiCommunityToolkit()
-                // Initialize the .NET MAUI Maps
-                .UseMauiMaps()
                 // Register the ViewModels and Views
                 .RegisterViewModels()
                 .RegisterViews()
                 // Register the App Services
                 .RegisterAppServices()
+                // Initialize the .NET MAUI Community Toolkit
+                .UseMauiCommunityToolkit()
+                // Initialize the .NET MAUI Maps
+                .UseMauiMaps()
+                // Initialize the Google Maps for Andriod & IOS
+//#if ANDROID
+//                .UseGoogleMaps()
+//#elif IOS
+//                .UseGoogleMaps("AIzaSyCk1AIoeHdPs2yYVAg_H2IiECAyBwVSWtA")
+//#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -41,8 +47,8 @@ namespace RoadTripPlannerApp
             builder.Services.AddTransient<ViewTripViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<MyTripsViewModel>();
-            builder.Services.AddSingleton<EditTripViewModel>();
-            builder.Services.AddSingleton<NewTripViewModel>();
+            builder.Services.AddTransient<EditTripViewModel>();
+            builder.Services.AddTransient<NewTripViewModel>();
 
 
             return builder;
@@ -56,15 +62,16 @@ namespace RoadTripPlannerApp
             builder.Services.AddTransient<LoadingPage>();
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<MyTripsPage>();
-            builder.Services.AddSingleton<EditTripPage>();
-            builder.Services.AddSingleton<NewTripPage>();
+            builder.Services.AddTransient<EditTripPage>();
+            builder.Services.AddTransient<NewTripPage>();
 
 
             return builder;
         }
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
+            builder.Services.AddSingleton<IAlertService, AlertService>();
 
             return builder;
         }

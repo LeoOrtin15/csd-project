@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RoadTripPlannerApp.Model;
 using RoadTripPlannerApp.Services;
 using RoadTripPlannerApp.View;
+using System.Collections.ObjectModel;
 
 namespace RoadTripPlannerApp.ViewModel;
 
@@ -11,13 +12,24 @@ public partial class ViewTripViewModel : ObservableObject
 {
     [ObservableProperty]
     public TripModel trip;
-    private readonly DatabaseService database;
-    public ViewTripViewModel(DatabaseService database)
+    [ObservableProperty]
+    public ObservableCollection<StopModel>? stops;
+    private readonly IDatabaseService database;
+    private readonly IAlertService alertService;
+    public ViewTripViewModel(IDatabaseService database, IAlertService alertService)
     {
-        Trip = new TripModel();
-
         this.database = database;
+        this.alertService = alertService;
+        Trip = new TripModel();
+        LoadStops();
     }
+    async void LoadStops()
+    {
+        List<StopModel> stopsList = await database.GetStops(Trip);
+
+        Stops = new ObservableCollection<StopModel>(stopsList);
+    }
+
     [RelayCommand]
     async Task Home()
     {
@@ -40,7 +52,7 @@ public partial class ViewTripViewModel : ObservableObject
     [RelayCommand]
     async Task Delete()
     {
-        if (await App.Current.MainPage.DisplayAlert("Delete Trip", "Are you sure you want to delete this trip?", "Yes", "No"))
+        if (await alertService.ShowConfirmation("Delete Trip", "Are you sure you want to delete this trip?"))
         {
             await database.DeleteTrip(Trip);
             await Shell.Current.GoToAsync($"/{nameof(MyTripsPage)}");
