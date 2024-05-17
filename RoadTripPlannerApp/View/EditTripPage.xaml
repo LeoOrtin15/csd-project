@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:RoadTripPlannerApp.Model"
              xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
-             
+             x:DataType="viewmodel:EditTripViewModel"
              x:Class="RoadTripPlannerApp.View.EditTripPage"
-             Title="EditTripPage"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
     <Grid Padding="10"
-          Margin="20"
-          RowDefinitions="Auto,Auto,Auto,*,Auto">
-        <StackLayout Orientation="Vertical"
-                     HorizontalOptions="Start">
-            <ImageButton Source="home.png"
-                         HorizontalOptions="Center"
-                         HeightRequest="30"
-                         WidthRequest="30"
-                         BackgroundColor="White"
-                         CornerRadius="5"
-                         Command="{Binding HomeCommand}"/>
-            <Label Text="Home"
-                   FontSize="Micro"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+          Margin="10"
+          RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="0"
+                     Spacing="20">
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Start">
+                <ImageButton Source="home.png"
+                             HorizontalOptions="Center"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             BackgroundColor="White"
+                             CornerRadius="5"
+                             Command="{Binding HomeCommand}"/>
+                <Label Text="Home"
+                       FontSize="Micro"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Start">
+                <ImageButton Source="trips.png"
+                             HorizontalOptions="Center"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             BackgroundColor="White"
+                             CornerRadius="5"
+                             Command="{Binding MyTripsCommand}"/>
+                <Label Text="My Trips"
+                       FontSize="Micro"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
         </StackLayout>
         <Frame Grid.Row="1">
             <StackLayout>
@@ -33,9 +51,10 @@
         </Frame>
         <StackLayout Orientation="Horizontal"
                      Grid.Row="2"
-                     Spacing="5">
+                     Spacing="5"
+                     HorizontalOptions="Center">
             <Frame>
-                <StackLayout Orientation="Horizontal"
+                <StackLayout Orientation="Vertical"
                              Spacing="0"
                              Padding="5">
                     <Label Text="Start Date:"
@@ -48,7 +67,7 @@
                 </StackLayout>
             </Frame>
             <Frame>
-                <StackLayout Orientation="Horizontal"
+                <StackLayout Orientation="Vertical"
                              Spacing="0"
                              Padding="5">
                     <Label Text="End Date:"
@@ -61,36 +80,89 @@
                 </StackLayout>
             </Frame>
         </StackLayout>
-        <CollectionView BindingContext="{Binding Days}"
-                        SelectionMode="Single"
-                        Grid.Row="2">
+        <Button Text="Update Trip Details"
+                Command="{Binding UpdateTripCommand}"
+                Grid.Row="3"/>
+        <CollectionView ItemsSource="{Binding StopsByDay}"
+                        SelectionMode="None"
+                        Grid.Row="4">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal"
+                <DataTemplate x:DataType="model:DayModel">
+                    <StackLayout Orientation="Vertical"
                                  Padding="10"
-                                 Margin="10">
-                        <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"
+                                 Margin="10"
+                                 HorizontalOptions="Center">
+                        <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}"
                                FontSize="Medium"
-                               TextColor="Black"
-                               BackgroundColor="Aqua"/>
-                        <CollectionView ItemsSource="{Binding Stops}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal"
-                                                 Padding="10"
-                                                 Margin="10">
-                                        <Entry Text="{Binding StopName}"
-                                               FontSize="Medium"/>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                               FontAttributes="Bold"
+                               TextColor="CadetBlue"
+                               HorizontalOptions="Center"/>
+                        <Border HorizontalOptions="CenterAndExpand"
+                                Padding="10"
+                                WidthRequest="300">
+                            <CollectionView ItemsSource="{Binding Stops}"
+                                            EmptyView="Stops not added yet">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:StopModel">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame HorizontalOptions="StartAndExpand"
+                                                   WidthRequest="200"
+                                                   HeightRequest="40">
+                                                <StackLayout>
+                                                    <Entry Text="{Binding StopName}"
+                                                           Placeholder="Stop Name"
+                                                           FontSize="Body"
+                                                           FontAttributes="None"/>
+                                                </StackLayout>
+                                            </Frame>
+                                            <Button Text="Update" 
+                                                    FontAttributes="None"
+                                                    FontSize="Micro"
+                                                    WidthRequest="35"
+                                                    HeightRequest="35"
+                                                    Padding="0"
+                                                    CommandParameter="{Binding .}"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EditTripViewModel}}, Path=UpdateStopCommand}"/>
+                                            <ImageButton Source="x.png"
+                                                         HeightRequest="35"
+                                                         WidthRequest="35"
+                                                         BackgroundColor="White"
+                                                         HorizontalOptions="Fill"
+                                                         CommandParameter="{Binding .}"
+                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EditTripViewModel}}, Path=DeleteStopCommand}"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Border>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Save"
-                Command="{Binding SaveTripCommand}"
-                Grid.Row="4"/>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="5"
+                     Padding="10"
+                     Margin="10,0,10,0">
+            <Frame HorizontalOptions="StartAndExpand"
+                   WidthRequest="230">
+                <StackLayout Orientation="Vertical">
+                    <SearchBar Text="{Binding NewStop.StopName}"
+                           Placeholder="Add Stop..."
+                           FontSize="Body"
+                           FontAttributes="None"/>
+                    <DatePicker x:Name="datePicker"
+                                Date="{Binding NewStop.ArrivalDate}"
+                                MinimumDate="{Binding Trip.StartDate}"
+                                FontSize="Body"
+                                HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <ImageButton Source="add.png"
+                         HeightRequest="40"
+                         WidthRequest="40"
+                         BackgroundColor="White"
+                         HorizontalOptions="Fill"
+                         Command="{Binding AddStopCommand}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

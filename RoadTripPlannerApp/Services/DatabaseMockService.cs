@@ -83,6 +83,11 @@ namespace RoadTripPlannerApp.Services
             throw new NotImplementedException();
         }
 
+        public Task UpdateStop(StopModel stop)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task UpdateTrip(TripModel trip)
         {
             throw new NotImplementedException();

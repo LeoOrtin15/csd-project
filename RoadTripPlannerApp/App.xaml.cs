@@ -1,6 +1,4 @@
-﻿using RoadTripPlannerApp.Services;
-
-namespace RoadTripPlannerApp
+﻿namespace RoadTripPlannerApp
 {
     public partial class App : Application
     {

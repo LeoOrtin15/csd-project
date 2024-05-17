@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RoadTripPlannerApp.View.ViewTripPage"
+             xmlns:model="clr-namespace:RoadTripPlannerApp.Model"
              xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
+             x:DataType="viewmodel:ViewTripViewModel"
              Title="ViewTripPage"
              Shell.NavBarIsVisible="False">
     <Grid Padding="10"
@@ -72,16 +74,36 @@
                 </StackLayout>
             </Frame>
         </StackLayout>
-        <CollectionView ItemsSource="{Binding Stops}"
-                        SelectionMode="Single"
-                        Grid.Row="3">
+        <CollectionView ItemsSource="{Binding StopsByDay}"
+                        Grid.Row="3"
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal"
+                <DataTemplate x:DataType="model:DayModel">
+                    <StackLayout Orientation="Vertical"
                                  Padding="10"
-                                 Margin="10">
-                        <Label Text="{Binding StopName}"
-                               FontSize="Medium"/>
+                                 Margin="10"
+                                 HorizontalOptions="Center">
+                        <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="CadetBlue"
+                               HorizontalOptions="Center"/>
+                        <Border HorizontalOptions="FillAndExpand">
+                            <CollectionView ItemsSource="{Binding Stops}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:StopModel">
+                                        <Frame HorizontalOptions="CenterAndExpand"
+                                               MinimumWidthRequest="200">
+                                            <StackLayout Margin="5"
+                                                         HorizontalOptions="Center">
+                                                <Label Text="{Binding StopName}"
+                                                       FontSize="Body"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Border>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

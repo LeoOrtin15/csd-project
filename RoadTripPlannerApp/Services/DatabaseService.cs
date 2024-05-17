@@ -103,6 +103,10 @@ public class DatabaseService : IDatabaseService
     {
         await connection.DeleteAsync(stop);
     }
+    public async Task UpdateStop(StopModel stop)
+    {
+        await connection.UpdateAsync(stop);
+    }
     // Get all stops from the trip
     public async Task<List<StopModel>> GetStops(TripModel trip)
     {

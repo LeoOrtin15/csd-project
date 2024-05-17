@@ -17,6 +17,7 @@ namespace RoadTripPlannerApp.Services
         Task UpdateUserDetails(string email, string username, string password);
         Task AddStop(StopModel stop, TripModel trip);
         Task DeleteStop(StopModel stop);
+        Task UpdateStop(StopModel stop);
         Task<List<StopModel>> GetStops(TripModel trip);
     }
 }
