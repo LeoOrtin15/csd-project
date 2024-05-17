@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RoadTripPlannerApp.View.MyTripsPage"
+             xmlns:model="clr-namespace:RoadTripPlannerApp.Model"
              xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
-             
+             x:DataType="viewmodel:MyTripsViewModel"
              Title="MyTripsPage"
              Shell.NavBarIsVisible="False">
     <Grid Padding="10"
@@ -30,12 +31,13 @@
                FontAttributes="Bold"
                TextColor="CadetBlue"/>
         <CollectionView ItemsSource="{Binding Trips}"
+                        EmptyView="You don't have any trip saved"
                         Grid.Row="2">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:TripModel">
                     <Frame>
                         <StackLayout Orientation="Horizontal"
                                      Padding="10"
@@ -61,21 +63,21 @@
                                              BackgroundColor="White"
                                              CornerRadius="5"
                                              CommandParameter="{Binding .}"
-                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=ViewCommand}"/>
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=ViewTripCommand}"/>
                                 <ImageButton Source="edit.png"
                                              HeightRequest="30"
                                              WidthRequest="30"
                                              BackgroundColor="White"
                                              CornerRadius="5"
                                              CommandParameter="{Binding .}"
-                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=EditCommand}"/>
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=EditTripCommand}"/>
                                 <ImageButton Source="delete.png"
                                              HeightRequest="30"
                                              WidthRequest="30"
                                              BackgroundColor="White"
                                              CornerRadius="5"
                                              CommandParameter="{Binding .}"
-                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=DeleteCommand}"/>
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyTripsViewModel}}, Path=DeleteTripCommand}"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

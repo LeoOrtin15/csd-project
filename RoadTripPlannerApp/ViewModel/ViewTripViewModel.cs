@@ -13,21 +13,36 @@ public partial class ViewTripViewModel : ObservableObject
     [ObservableProperty]
     public TripModel trip;
     [ObservableProperty]
-    public ObservableCollection<StopModel>? stops;
+    public ObservableCollection<DayModel>? stopsByDay;
+    [ObservableProperty]
+    public ObservableCollection<DateTime> days;
     private readonly IDatabaseService database;
     private readonly IAlertService alertService;
     public ViewTripViewModel(IDatabaseService database, IAlertService alertService)
     {
+        Trip = new TripModel();
+        Days = new ObservableCollection<DateTime>();
         this.database = database;
         this.alertService = alertService;
-        Trip = new TripModel();
-        LoadStops();
+        LoadItinerary();
     }
-    async void LoadStops()
+    async void LoadItinerary()
     {
-        List<StopModel> stopsList = await database.GetStops(Trip);
+        await Task.Delay(100);
 
-        Stops = new ObservableCollection<StopModel>(stopsList);
+        var stopsList = await database.GetStops(Trip);
+
+        for (DateTime date = Trip.StartDate; date <= Trip.EndDate; date = date.AddDays(1))
+        {
+            Days.Add(date);
+        }
+
+        StopsByDay = new ObservableCollection<DayModel>(
+            Days.GroupJoin(
+                stopsList,
+                date => date,
+                stop => stop.ArrivalDate.Date,
+                (date, stopsOnDate) => new DayModel { Date = date, Stops = stopsOnDate.ToList() }));
     }
 
     [RelayCommand]

@@ -32,7 +32,7 @@ public partial class MyTripsViewModel : ObservableObject
         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
     }
     [RelayCommand]
-    async Task View(TripModel trip)
+    async Task ViewTrip(TripModel trip)
     {
         await Shell.Current.GoToAsync($"/{nameof(ViewTripPage)}", true, 
             new Dictionary<string, object>
@@ -41,7 +41,7 @@ public partial class MyTripsViewModel : ObservableObject
             });
     }
     [RelayCommand]
-    async Task Edit(TripModel trip)
+    async Task EditTrip(TripModel trip)
     {
         await Shell.Current.GoToAsync($"/{nameof(EditTripPage)}", true,
             new Dictionary<string, object>
@@ -50,7 +50,7 @@ public partial class MyTripsViewModel : ObservableObject
             });
     }
     [RelayCommand]
-    async Task Delete(TripModel trip)
+    async Task DeleteTrip(TripModel trip)
     {
         if (await alertService.ShowConfirmation("Delete Trip", "Are you sure you want to delete this trip?"))
         {
