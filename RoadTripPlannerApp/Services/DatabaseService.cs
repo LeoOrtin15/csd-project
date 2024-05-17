@@ -3,10 +3,10 @@ using SQLite;
 
 namespace RoadTripPlannerApp.Services;
 
-public class DatabaseService
+public class DatabaseService : IDatabaseService
 {
     private readonly SQLiteAsyncConnection connection;
-    public  DatabaseService()
+    public DatabaseService()
     {
         if (connection != null)
             return;
@@ -17,6 +17,7 @@ public class DatabaseService
 
         connection.CreateTableAsync<UserModel>();
         connection.CreateTableAsync<TripModel>();
+        connection.CreateTableAsync<StopModel>();
     }
 
     // Add new user to the database
@@ -57,7 +58,7 @@ public class DatabaseService
     }
     // Update the user details
     public async Task UpdateUserDetails(string email, string username, string password)
-    { 
+    {
         var user = await GetLoggedInUser();
         user.Username = username;
         user.Email = email;
@@ -90,5 +91,25 @@ public class DatabaseService
     public async Task DeleteTrip(TripModel trip)
     {
         await connection.DeleteAsync(trip);
+    }
+    // Add a new stop to the trip
+    public async Task AddStop(StopModel stop, TripModel trip)
+    {
+        stop.TripId = trip.Id;
+        await connection.InsertAsync(stop);
+    }
+    // Delete the stop
+    public async Task DeleteStop(StopModel stop)
+    {
+        await connection.DeleteAsync(stop);
+    }
+    public async Task UpdateStop(StopModel stop)
+    {
+        await connection.UpdateAsync(stop);
+    }
+    // Get all stops from the trip
+    public async Task<List<StopModel>> GetStops(TripModel trip)
+    {
+        return await connection.Table<StopModel>().Where(i => i.TripId == trip.Id).ToListAsync();
     }
 }

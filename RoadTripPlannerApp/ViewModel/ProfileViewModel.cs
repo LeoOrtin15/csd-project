@@ -14,10 +14,13 @@ public partial class ProfileViewModel : ObservableObject
     public string? password;
     [ObservableProperty]
     public string? email;
-    private readonly DatabaseService database;
-    public ProfileViewModel(DatabaseService database)
+    private readonly IDatabaseService database;
+    private readonly IAlertService alertService;
+    public ProfileViewModel(IDatabaseService database, IAlertService alertService)
     {
         this.database = database;
+        this.alertService = alertService;
+
         LoadUserDetails();
     }
     async void LoadUserDetails()
@@ -27,7 +30,11 @@ public partial class ProfileViewModel : ObservableObject
         Email = user.Email;
         Password = user.Password;
     }
-
+    [RelayCommand]
+    async Task Home()
+    {
+        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+    }
     [RelayCommand]
     async Task UpdateDetails()
     {
@@ -35,20 +42,18 @@ public partial class ProfileViewModel : ObservableObject
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrWhiteSpace(Password))
             {
-                await App.Current.MainPage.DisplayAlert("Mandatory Fields Empty", "'Email', 'Username' and 'Password' are mandatory fields", "OK");
+                await alertService.ShowAlert("Mandatory Fields Empty", "'Email', 'Username' and 'Password' are mandatory fields");
             }
             else
             {
                 await database.UpdateUserDetails(Email, Username, Password);
-                await App.Current.MainPage.DisplayAlert("User Details Updated", "User details have been updated successfully", "OK");
+                await alertService.ShowAlert("User Details Updated", "User details have been updated successfully");
             }
         }
         catch (Exception ex)
         {
             if (ex.Message.Contains("UNIQUE constraint failed"))
-                await App.Current.MainPage.DisplayAlert("Invalid Data Entered", "'Email' and 'Username' must be unique", "OK");
-            else
-                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                await alertService.ShowAlert("Invalid Data Entered", "'Email' and 'Username' must be unique");
         }
     }
     [RelayCommand]
