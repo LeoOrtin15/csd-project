@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RoadTripPlannerApp.View.ViewTripPage"
+             xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
              Title="ViewTripPage"
              Shell.NavBarIsVisible="False">
     <Grid Padding="10"
@@ -44,7 +45,7 @@
                HorizontalOptions="Center"
                WidthRequest="300">
             <StackLayout>
-                <Label Text="{Binding Trip.Name}"
+                <Label Text="{Binding Trip.TripName}"
                        FontSize="Medium"
                        FontAttributes="Bold"
                        HorizontalOptions="CenterAndExpand"/>
@@ -57,7 +58,7 @@
             <Frame>
                 <StackLayout Orientation="Horizontal"
                              Padding="5">
-                    <Label Text="{Binding Trip.StartDate, StringFormat='Start Date: {0}'}"
+                    <Label Text="{Binding Trip.StartDate, StringFormat='Start Date: {0:MM/dd/yyyy}'}"
                            VerticalOptions="Center"
                            FontAttributes="Bold"/>
                 </StackLayout>
@@ -65,7 +66,7 @@
             <Frame>
                 <StackLayout Orientation="Horizontal"
                              Padding="5">
-                    <Label Text="{Binding Trip.EndDate, StringFormat='End Date: {0}'}"
+                    <Label Text="{Binding Trip.EndDate, StringFormat='End Date: {0:MM/dd/yyyy}'}"
                            VerticalOptions="Center"
                            FontAttributes="Bold"/>
                 </StackLayout>
@@ -79,7 +80,7 @@
                     <StackLayout Orientation="Horizontal"
                                  Padding="10"
                                  Margin="10">
-                        <Label Text="{Binding Name}"
+                        <Label Text="{Binding StopName}"
                                FontSize="Medium"/>
                     </StackLayout>
                 </DataTemplate>

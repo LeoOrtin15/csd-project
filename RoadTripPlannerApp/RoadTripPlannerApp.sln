@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadTripPlannerApp", "RoadTripPlannerApp.csproj", "{B9C74745-7526-4ED2-94B0-BA6D383AE52B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoadTripPlannerAppTest", "..\RoadTripPlannerAppTest\RoadTripPlannerAppTest.csproj", "{9AEF72B0-B024-4FAD-AEB0-AD55D404941D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{B9C74745-7526-4ED2-94B0-BA6D383AE52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9C74745-7526-4ED2-94B0-BA6D383AE52B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9C74745-7526-4ED2-94B0-BA6D383AE52B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9AEF72B0-B024-4FAD-AEB0-AD55D404941D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEF72B0-B024-4FAD-AEB0-AD55D404941D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEF72B0-B024-4FAD-AEB0-AD55D404941D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEF72B0-B024-4FAD-AEB0-AD55D404941D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

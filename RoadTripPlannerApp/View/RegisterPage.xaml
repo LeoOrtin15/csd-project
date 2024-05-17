@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RoadTripPlannerApp.View.RegisterPage"
              xmlns:viewmodel="clr-namespace:RoadTripPlannerApp.ViewModel"
+             x:DataType="viewmodel:RegisterViewModel"
              Title="RegisterPage"
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="Auto, Auto, Auto"

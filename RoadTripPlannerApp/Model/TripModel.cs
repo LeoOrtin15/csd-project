@@ -9,9 +9,9 @@ namespace RoadTripPlannerApp.Model
         public int Id { get; set; }
         [Indexed]
         public int UserId { get; set; }
-        public string? Name { get; set; }
+        public string? TripName { get; set; }
         public string? FirstStop { get; set; }
-        public string? StartDate { get; set; }
-        public string? EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
