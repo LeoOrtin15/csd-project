@@ -34,7 +34,7 @@ public partial class MyTripsViewModel : ObservableObject
     [RelayCommand]
     async Task ViewTrip(TripModel trip)
     {
-        await Shell.Current.GoToAsync($"/{nameof(ViewTripPage)}", true, 
+        await Shell.Current.GoToAsync($"/{nameof(ViewTripPage)}", true,
             new Dictionary<string, object>
             {
                 { "Trip", trip }

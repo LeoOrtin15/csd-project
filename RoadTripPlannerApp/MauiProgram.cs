@@ -22,12 +22,6 @@ namespace RoadTripPlannerApp
                 .UseMauiCommunityToolkit()
                 // Initialize the .NET MAUI Maps
                 .UseMauiMaps()
-                // Initialize the Google Maps for Andriod & IOS
-//#if ANDROID
-//                .UseGoogleMaps()
-//#elif IOS
-//                .UseGoogleMaps("AIzaSyCk1AIoeHdPs2yYVAg_H2IiECAyBwVSWtA")
-//#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

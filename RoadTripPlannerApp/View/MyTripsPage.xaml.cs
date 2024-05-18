@@ -5,9 +5,8 @@ namespace RoadTripPlannerApp.View;
 public partial class MyTripsPage : ContentPage
 {
     public MyTripsPage(MyTripsViewModel vm)
-	{
-		InitializeComponent();
-
+    {
+        InitializeComponent();
         BindingContext = vm;
     }
 }
