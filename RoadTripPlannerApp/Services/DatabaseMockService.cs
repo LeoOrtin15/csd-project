@@ -10,9 +10,9 @@ namespace RoadTripPlannerApp.Services
 
         public DatabaseMockService()
         {
-            users = new List<UserModel>() 
-            { 
-                new UserModel() { Email = "user1@mail.com", Username = "user1", Password = "password1" }, 
+            users = new List<UserModel>()
+            {
+                new UserModel() { Email = "user1@mail.com", Username = "user1", Password = "password1" },
                 new UserModel() { Email = "user2@mail.com", Username = "user2", Password = "password2" }
             };
             trips = new List<TripModel>();

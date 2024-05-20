@@ -1,6 +1,6 @@
 ﻿using Moq;
 using RoadTripPlannerApp.Model;
-using RoadTripPlannerApp.Services; 
+using RoadTripPlannerApp.Services;
 using RoadTripPlannerApp.ViewModel;
 
 namespace RoadTripPlannerAppTest
@@ -10,6 +10,7 @@ namespace RoadTripPlannerAppTest
         [Fact]
         public async Task Login_ValidInput_SuccessfulLogin()
         {
+            await Task.Delay(10);
             //// Arrange
             //var databaseService = new DatabaseMockService();
             //var alert = new Mock<IAlertService>();
