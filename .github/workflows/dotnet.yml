@@ -61,3 +61,46 @@ jobs:
     - name: Test
       run: dotnet test
       working-directory: ./RoadTripPlannerAppTest
+
+  # Define a deploy to development environment job
+  deployDev:
+    name: Deploy to Development
+    # Job runs only if the event is a pull request
+    if: github.event_name == 'pull_request'
+    # The job needs the test job to pass first
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    # Define some environment variables
+    environment: 
+      # The environment name must match the envrionment name in the repository
+      name: Development
+      url: 'http://dev.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo Your code is being deployed to http://dev.myapp.com
+  
+  # Our deployment to staging environment
+  deployStaging:
+    name: Deploy to Staging
+    # deploy to staging only if we are committing to main
+    if: github.event.ref == 'refs/heads/main'
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    environment:
+      name: Staging
+      url: 'http://test.myapp.com'
+    steps:
+    - name: Deploy
+      run: echo I am deploying to staging http://test.myapp.com
+  
+  # Deploy to production environment
+  deployProduction:
+    name: Deploy to Production
+    needs: [ deployStaging ]
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: 'http://www.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying to production
