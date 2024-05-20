@@ -60,3 +60,4 @@ jobs:
       uses: actions/checkout@v4  
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: ./RoadTripPlannerAppTest
