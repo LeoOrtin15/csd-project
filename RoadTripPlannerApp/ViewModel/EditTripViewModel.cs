@@ -29,7 +29,7 @@ public partial class EditTripViewModel : ObservableObject
         newStop = new StopModel();
         LoadItinerary();
     }
-    async void LoadItinerary()
+    public async void LoadItinerary()
     {
         await Task.Delay(100);
 
@@ -50,7 +50,7 @@ public partial class EditTripViewModel : ObservableObject
                 (date, stopsOnDate) => new DayModel { Date = date, Stops = stopsOnDate.ToList() }));
     }
     [RelayCommand]
-    async Task Home()
+    public async Task Home()
     {
         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
     }
@@ -60,7 +60,7 @@ public partial class EditTripViewModel : ObservableObject
         await Shell.Current.GoToAsync($"/{nameof(MyTripsPage)}");
     }
     [RelayCommand]
-    async Task UpdateStop(StopModel stop)
+    public async Task UpdateStop(StopModel stop)
     {
         if (string.IsNullOrWhiteSpace(stop.StopName))
         {
@@ -72,7 +72,7 @@ public partial class EditTripViewModel : ObservableObject
         }
     }
     [RelayCommand]
-    async Task DeleteStop(StopModel stop)
+    public async Task DeleteStop(StopModel stop)
     {
         await database.DeleteStop(stop);
         LoadItinerary();
@@ -96,7 +96,7 @@ public partial class EditTripViewModel : ObservableObject
         }
     }
     [RelayCommand]
-    async Task UpdateTrip()
+    public async Task UpdateTrip()
     {
         if (string.IsNullOrWhiteSpace(Trip.TripName))
         {

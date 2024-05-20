@@ -10,7 +10,11 @@ namespace RoadTripPlannerApp.Services
 
         public DatabaseMockService()
         {
-            users = new List<UserModel>();
+            users = new List<UserModel>()
+            {
+                new UserModel() { Email = "user1@mail.com", Username = "user1", Password = "password1" },
+                new UserModel() { Email = "user2@mail.com", Username = "user2", Password = "password2" }
+            };
             trips = new List<TripModel>();
             stops = new List<StopModel>();
         }
@@ -45,9 +49,17 @@ namespace RoadTripPlannerApp.Services
             return users;
         }
 
-        public Task<UserModel> GetLoggedInUser()
+        public async Task<UserModel> GetLoggedInUser()
         {
-            throw new NotImplementedException();
+            await Task.Delay(10);
+            foreach (var user in users)
+            {
+                if (user.IsUserLoggedIn)
+                {
+                    return user;
+                }
+            }
+            return (new UserModel());
         }
 
         public Task<List<StopModel>> GetStops(TripModel trip)
@@ -73,14 +85,16 @@ namespace RoadTripPlannerApp.Services
             return (new UserModel());
         }
 
-        public Task LogInUser(UserModel user)
+        public async Task LogInUser(UserModel user)
         {
-            throw new NotImplementedException();
+            await Task.Delay(10);
+            user.IsUserLoggedIn = true;
         }
 
-        public Task LogOutUser()
+        public async Task LogOutUser()
         {
-            throw new NotImplementedException();
+            await Task.Delay(10);
+            GetLoggedInUser().Result.IsUserLoggedIn = false;
         }
 
         public Task UpdateStop(StopModel stop)

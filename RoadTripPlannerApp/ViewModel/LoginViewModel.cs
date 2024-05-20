@@ -21,7 +21,7 @@ public partial class LoginViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Login()
+    public async Task Login()
     {
         if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
@@ -52,7 +52,7 @@ public partial class LoginViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Register()
+    public async Task Register()
     {
         // Redirect to RegisterPage
         await Shell.Current.GoToAsync($"/{nameof(RegisterPage)}");
