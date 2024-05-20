@@ -62,7 +62,7 @@ public partial class NewTripViewModel : ObservableObject
         StartDate = DateTime.Today;
         EndDate = DateTime.Today;
 
-        await Shell.Current.GoToAsync($"/{nameof(EditTripPage)}", true, 
+        await Shell.Current.GoToAsync($"/{nameof(EditTripPage)}", true,
             new Dictionary<string, object>
             {
                 { "Trip", trip }

@@ -62,7 +62,7 @@ namespace RoadTripPlannerApp.Services
             return (new UserModel());
         }
 
-        public Task<List<StopModel>> GetStops(TripModel trip)   
+        public Task<List<StopModel>> GetStops(TripModel trip)
         {
             throw new NotImplementedException();
         }
