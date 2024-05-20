@@ -41,19 +41,17 @@ public partial class RegisterViewModel : ObservableObject
                     Username = Username,
                     Password = Password
                 });
+                // Redirect to LoginPage
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                 Email = "";
                 Username = "";
                 Password = "";
-                // Redirect to LoginPage
-                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             }
         }
         catch (Exception ex)
         {
             if (ex.Message.Contains("UNIQUE constraint failed"))
                 await alertService.ShowAlert("Invalid Data Entered", "'Email' and 'Username' must be unique");
-            //else
-            //    await alertService.ShowAlert("Error", ex.Message);
         }
     }
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using RoadTripPlannerApp.Services;
 using RoadTripPlannerApp.View;
 using RoadTripPlannerApp.ViewModel;
+using Xunit.Runners.Maui;
 
 namespace RoadTripPlannerApp
 {
@@ -22,12 +23,15 @@ namespace RoadTripPlannerApp
                 .UseMauiCommunityToolkit()
                 // Initialize the .NET MAUI Maps
                 .UseMauiMaps()
-                // Initialize the Google Maps for Andriod & IOS
-//#if ANDROID
-//                .UseGoogleMaps()
-//#elif IOS
-//                .UseGoogleMaps("AIzaSyCk1AIoeHdPs2yYVAg_H2IiECAyBwVSWtA")
-//#endif
+                // xUnit initialization
+                .ConfigureTests(new TestOptions
+                {
+                    Assemblies =
+                {
+                    typeof(MauiProgram).Assembly
+                }
+                })
+                .UseVisualRunner()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

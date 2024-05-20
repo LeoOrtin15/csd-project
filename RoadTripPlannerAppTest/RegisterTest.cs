@@ -18,7 +18,7 @@ namespace RoadTripPlannerAppTest
             registerViewModel.Username = "test";
             registerViewModel.Password = "test";
             // Act
-            await registerViewModel.Register();
+            await registerViewModel.RegisterCommand.ExecuteAsync(null);
             // Assert
             Assert.NotNull(await databaseService.GetUser("test"));
         }
@@ -29,14 +29,13 @@ namespace RoadTripPlannerAppTest
             var databaseService = new DatabaseMockService();
             var alert = new Mock<IAlertService>();
             var registerViewModel = new RegisterViewModel(databaseService, alert.Object);
-            registerViewModel.Email = "";
-            registerViewModel.Username = "test";
+            registerViewModel.Email = "test";
+            registerViewModel.Username = "user1";
             registerViewModel.Password = "test";
             // Act
-            await registerViewModel.Register();
+            await registerViewModel.RegisterCommand.ExecuteAsync(null);
             // Assert
-            var user = await databaseService.GetUser("test");
-            Assert.Equivalent(user, new UserModel());
+            Assert.Equivalent(await databaseService.GetUser("test"), new UserModel());
         }
     }
 }
