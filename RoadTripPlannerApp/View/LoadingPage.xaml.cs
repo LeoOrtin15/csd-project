@@ -4,9 +4,9 @@ namespace RoadTripPlannerApp.View;
 
 public partial class LoadingPage : ContentPage
 {
-	private readonly IDatabaseService database;
+    private readonly IDatabaseService database;
     public LoadingPage(IDatabaseService database)
-	{
+    {
         InitializeComponent();
 
         this.database = database;
