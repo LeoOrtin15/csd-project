@@ -7,11 +7,11 @@ assignees: ''
 
 ---
 
-### **As a**<type of user>,
+### **As a**<type of user>
 ### **I want to**<a goal>
-### **so that**<benefit>.
+### **so that**<benefit>
 
-### **Acceptance Criteria:** 
+### **Acceptance Criteria:**
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3

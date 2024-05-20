@@ -8,23 +8,55 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
+  
+  setup:
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['8.0.x']
+
+    steps:
+    - name: Chaclout code
+      uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Install .NET MAUI workloads
+      run: dotnet workload install maui
+
   build:
+
+    needs: [setup]
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['8.0.x']
+        target-framework: [net8.0-android, net8.0-ios]
+
+    steps:
+    - name: Checkout code  
+      uses: actions/checkout@v4
+    - name: Restore dependencies
+      run: dotnet restore RoadTripPlannerApp/RoadTripPlannerApp.csproj
+    - name: Build
+      run: dotnet build RoadTripPlannerApp/RoadTripPlannerApp.csproj --no-restore -f ${{ matrix.target-framework }}
+
+  test:
+
+    needs: [build]
 
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Install .NET MAUI
-      run: dotnet workload install maui
-    - name: Restore dependencies
-      run: dotnet restore RoadTripPlannerApp/RoadTripPlannerApp.csproj
-    - name: Build
-      run: dotnet build RoadTripPlannerApp/RoadTripPlannerApp.csproj --no-restore
-    #- name: Test
-      #run: dotnet test --no-build --verbosity normal
+    - name: Checkout code  
+      uses: actions/checkout@v4  
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
