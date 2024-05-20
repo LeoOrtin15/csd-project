@@ -59,4 +59,5 @@ jobs:
     - name: Checkout code  
       uses: actions/checkout@v4  
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test
+      working-directory: ./RoadTripPlannerAppTest
