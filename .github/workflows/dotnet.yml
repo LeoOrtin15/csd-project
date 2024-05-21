@@ -98,7 +98,7 @@ jobs:
     name: Deploy to Staging
     # deploy to staging only if we are committing to main
     if: github.event.ref == 'refs/heads/main'
-    needs: [ test ]
+    needs: [ test, analysis ]
     runs-on: ubuntu-latest
     environment:
       name: Staging

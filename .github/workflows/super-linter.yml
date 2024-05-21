@@ -8,9 +8,11 @@ name: Lint Code Base
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches-ignore: [ "main" ]
+  # Everyday at 2am
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 jobs:
   run-lint:
     runs-on: ubuntu-latest
