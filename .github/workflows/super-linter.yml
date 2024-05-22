@@ -7,8 +7,8 @@
 name: Lint Code Base
 
 on:
-  push:
-    branches-ignore: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   # Everyday at 2am
   schedule:
     - cron: '0 2 * * *'
