@@ -2,7 +2,7 @@
 
 namespace RoadTripPlannerApp.Model
 {
-    [Table("user")]
+    [Table("users")]
     public class UserModel
     {
         [PrimaryKey, AutoIncrement]
