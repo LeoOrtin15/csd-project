@@ -12,8 +12,8 @@ namespace RoadTripPlannerApp.Services
         {
             users = new List<UserModel>()
             {
-                new UserModel() { Email = "user1@mail.com", Username = "user1", Password = "password1" },
-                new UserModel() { Email = "user2@mail.com", Username = "user2", Password = "password2" }
+                new UserModel() { Id = 0, Email = "user1@mail.com", Username = "user1", Password = "password1" },
+                new UserModel() { Id = 1, Email = "user2@mail.com", Username = "user2", Password = "password2" }
             };
             trips = new List<TripModel>();
             stops = new List<StopModel>();

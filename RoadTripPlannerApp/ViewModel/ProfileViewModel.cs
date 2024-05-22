@@ -23,7 +23,7 @@ public partial class ProfileViewModel : ObservableObject
 
         LoadUserDetails();
     }
-    async void LoadUserDetails()
+    public async void LoadUserDetails()
     {
         UserModel user = await database.GetLoggedInUser();
         Username = user.Username;
@@ -31,12 +31,12 @@ public partial class ProfileViewModel : ObservableObject
         Password = user.Password;
     }
     [RelayCommand]
-    async Task Home()
+    public async Task Home()
     {
         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
     }
     [RelayCommand]
-    async Task UpdateDetails()
+    public async Task UpdateDetails()
     {
         try
         {
@@ -57,7 +57,7 @@ public partial class ProfileViewModel : ObservableObject
         }
     }
     [RelayCommand]
-    async Task LogOut()
+    public async Task LogOut()
     {
         // Log out the user
         await database.LogOutUser();

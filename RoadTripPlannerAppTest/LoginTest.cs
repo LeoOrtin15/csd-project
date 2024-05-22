@@ -10,7 +10,7 @@ namespace RoadTripPlannerAppTest
         [Fact]
         public async Task Login_ValidInput_SuccessfulLogin()
         {
-            await Task.Delay(10);
+            await Task.Delay(1);
             //// Arrange
             //var databaseService = new DatabaseMockService();
             //var alert = new Mock<IAlertService>();

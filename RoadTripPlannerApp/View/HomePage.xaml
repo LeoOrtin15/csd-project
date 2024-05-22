@@ -8,15 +8,9 @@
              Title="Road Trip Planner"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
-    <Grid RowDefinitions="400, *, *">
-        <!--<mauimaps:Map x:Name="map" 
-                  IsShowingUser="True" 
-                  IsTrafficEnabled="True" 
-                  MapType="Street">
-        </mauimaps:Map>-->
-        <!--<maps:Map x:Name="map"
-                        MyLocationEnabled="True"
-                        InitialCameraUpdate="53.33658221363408, -6.3268649340705405"/>-->
+    <Grid RowDefinitions="500,*,Auto">
+        <Image Source="front.png"
+               Aspect="AspectFill"/>
         <Button Grid.Row="1"
                 Text="Create New Trip"
                 FontSize="20"
@@ -26,7 +20,8 @@
         <StackLayout Orientation="Horizontal"
                      Grid.Row="2"
                      HorizontalOptions="CenterAndExpand"
-                     Spacing="200">
+                     Spacing="200"
+                     VerticalOptions="Start">
             <StackLayout Orientation="Vertical">
                 <Frame Style="{StaticResource iconFrameStyle}"
                        HeightRequest="60"
