@@ -5,7 +5,7 @@ using RoadTripPlannerApp.ViewModel;
 
 namespace RoadTripPlannerAppTest
 {
-    public  class ProfileTest
+    public class ProfileTest
     {
 
         [Fact]
