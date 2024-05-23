@@ -24,7 +24,7 @@ jobs:
     - name: Install .NET MAUI workloads
       run: dotnet workload install maui
     - name: Cache NuGet packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/RoadTripPlannerApp.csproj') }}
@@ -50,7 +50,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build-${{ matrix.target-framework }}
-        path: public
+        path: |
+          RoadTripPlannerApp/bin/Release/net8.0-android/
+          RoadTripPlannerApp/bin/Release/net8.0-ios/
 
   test:
     needs: [build]
