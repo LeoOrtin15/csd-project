@@ -15,7 +15,7 @@ jobs:
   setup:
     runs-on: windows-latest
     steps:
-    - name: Chaclout code
+    - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -23,6 +23,13 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Install .NET MAUI workloads
       run: dotnet workload install maui
+    - name: Cache NuGet packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/RoadTripPlannerApp.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
 
   build:
     name: Build MAUI for Android and IOS
@@ -39,16 +46,28 @@ jobs:
       run: dotnet restore RoadTripPlannerApp/RoadTripPlannerApp.csproj
     - name: Build
       run: dotnet build RoadTripPlannerApp/RoadTripPlannerApp.csproj --no-restore -f ${{ matrix.target-framework }}
+    - name: Save build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-${{ matrix.target-framework }}
+        path: public
 
   test:
     needs: [build]
     runs-on: windows-latest
     steps:
     - name: Checkout code  
-      uses: actions/checkout@v4  
+      uses: actions/checkout@v4
+    - name: Restore dependencies
+      run: dotnet restore RoadTripPlannerAppTest/RoadTripPlannerAppTest.csproj 
     - name: Test
       run: dotnet test
       working-directory: ./RoadTripPlannerAppTest
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: ./RoadTripPlannerAppTest/TestResults
 
   analysis:
     needs: [build]
@@ -76,7 +95,6 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
 
-
   deployDev:
     name: Deploy to Development
     # Job runs only if the event is a pull request
@@ -88,10 +106,9 @@ jobs:
     environment: 
       # The environment name must match the envrionment name in the repository
       name: Development
-      url: 'http://dev.myapp.com'
     steps:
       - name: Deploy
-        run: echo Your code is being deployed to http://dev.myapp.com
+        run: echo Deploying to development
   
   # Our deployment to staging environment
   deployStaging:
@@ -102,10 +119,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Staging
-      url: 'http://test.myapp.com'
     steps:
     - name: Deploy
-      run: echo I am deploying to staging http://test.myapp.com
+      run: echo Deploying to staging http://test.myapp.com
   
   # Deploy to production environment
   deployProduction:
@@ -114,7 +130,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: 'http://www.myapp.com'
     steps:
       - name: Deploy
-        run: echo I am deploying to production
+        run: echo Deploying to production
