@@ -46,13 +46,6 @@ jobs:
       run: dotnet restore RoadTripPlannerApp/RoadTripPlannerApp.csproj
     - name: Build
       run: dotnet build RoadTripPlannerApp/RoadTripPlannerApp.csproj --no-restore -f ${{ matrix.target-framework }}
-    - name: Save build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-${{ matrix.target-framework }}
-        path: |
-          RoadTripPlannerApp/bin/Release/net8.0-android/
-          RoadTripPlannerApp/bin/Release/net8.0-ios/
 
   test:
     needs: [build]
@@ -65,11 +58,6 @@ jobs:
     - name: Test
       run: dotnet test
       working-directory: ./RoadTripPlannerAppTest
-    - name: Upload test results
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: ./RoadTripPlannerAppTest/TestResults
 
   analysis:
     needs: [build]
